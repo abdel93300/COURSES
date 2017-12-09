@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class EntityManagerProducer {
 
-	private static String DEFAULT_JDBC_URL = "jdbc:h2:file:~/db/referentiel";
+	private static String DEFAULT_JDBC_URL = "jdbc:h2:file:C:/Users/Utilisateur-SJD/workspace/listecourses";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EntityManagerProducer.class);
 	
@@ -24,7 +24,7 @@ public class EntityManagerProducer {
 	private static synchronized void initEntityManagerFactory() {
 		if (EMF == null) {
 			final Map<String, String> properties = new HashMap<>();
-			String jdbcUrl = System.getProperty("referentiel.db.jdbc.url");
+			String jdbcUrl = System.getProperty("listecourses.db.jdbc.url");
 			if (jdbcUrl == null) {
 				LOGGER.debug("Fallback to default JDBC URL {}", DEFAULT_JDBC_URL);
 				jdbcUrl = DEFAULT_JDBC_URL;
@@ -35,7 +35,7 @@ public class EntityManagerProducer {
 			properties.put("javax.persistence.jdbc.driver", "org.h2.Driver");
 			properties.put("hibernate.show_sql", "true");
 			EMF = Persistence.createEntityManagerFactory(
-					"BasePatrimoineLocale", properties);
+					"listecourses", properties);
 			LOGGER.info("Successfully created a JPA Entity Manager Factory for DB located at {}", jdbcUrl);
 		}
 	}

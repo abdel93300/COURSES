@@ -1,4 +1,4 @@
-package co.simplon.PoleEmploi.patrimoine.endpoint;
+package co.simplon.PoleEmploi.listecourses.endpoint;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -23,26 +23,26 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import co.simplon.PoleEmploi.patrimoine.dao.MonumentDao;
-import co.simplon.PoleEmploi.patrimoine.dao.VilleDao;
-import co.simplon.PoleEmploi.patrimoine.modele.Monument;
-import co.simplon.PoleEmploi.patrimoine.modele.Ville;
+import co.simplon.PoleEmploi.listecourses.dao.ProduitsDao;
+import co.simplon.PoleEmploi.listecourses.dao.ListeCoursesDao;
+import co.simplon.PoleEmploi.listecourses.modele.Produits;
+import co.simplon.PoleEmploi.listecourses.modele.ListeCourses;
 
-@Path("/villes")
+@Path("/listecourses")
 @RequestScoped
-public class VilleResource {
+public class ListeCoursesResource {
 
 	private static int DEFAULT_PAGE_SIZE = 10;
 
 	@Inject
-	private VilleDao villeDao;
+	private ListeCoursesDao listeCoursesDao;
 
 	@Inject
-	private MonumentDao monumentDao;
+	private ProduitsDao produitsDao;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Ville> getVilles(@QueryParam("from") Integer from,
+	public List<ListeCourses> getListeCourses(@QueryParam("from") Integer from,
 			@QueryParam("limit") Integer limit) {
 		if (from == null) {
 			from = 0;
@@ -50,14 +50,14 @@ public class VilleResource {
 		if (limit == null) {
 			limit = DEFAULT_PAGE_SIZE;
 		}
-		List<Ville> villes = villeDao.findAll(from, limit);
-		return villes;
+		List<ListeCourses> listeCourses = listeCoursesDao.findAll(from, limit);
+		return listeCourses;
 	}
 
 	@GET
-	@Path("{id}/monuments")
+	@Path("{id}/produits")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Monument> getMonumentsByVille(@PathParam("id") Long id,
+	public List<Produits> getProduitsByListeCourses(@PathParam("id") Long id,
 			@QueryParam("from") Integer from, @QueryParam("limit") Integer limit) {
 		if (from == null) {
 			from = 0;
@@ -65,28 +65,28 @@ public class VilleResource {
 		if (limit == null) {
 			limit = DEFAULT_PAGE_SIZE;
 		}
-		List<Monument> monuments = monumentDao.findAllForVilleId(id, from,
+		List<Produits> produits = produitsDao.findAllForListeCoursesId(id, from,
 				limit);
-		return monuments;
+		return produits;
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getVilleById(@PathParam("id") Long id) {
-		Ville ville = villeDao.getVilleById(id);
-		if (ville != null)
-			return Response.ok(ville).build();
+		ListeCourses listeCourses = listeCoursesDao.getListeCoursesById(id);
+		if (listeCourses != null)
+			return Response.ok(listeCourses).build();
 		return Response.status(Status.NOT_FOUND).build();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createVille(Ville villeACreer, @Context UriInfo uriInfo) {
-		if (!isVilleValid(villeACreer)) {
+	public Response createListeCourses(ListeCourses listeCourses, @Context UriInfo uriInfo) {
+		if (!isListeCoursesValid(villeACreer)) {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		Ville ville = villeDao.createVille(villeACreer);
+		ListeCourses ville = villeDao.createVille(villeACreer);
 		if (ville != null) {
 			URL url;
 			URI uri;
@@ -106,19 +106,19 @@ public class VilleResource {
 	}
 
 	@POST
-	@Path("{id}/monuments")
+	@Path("{id}/produits")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createMonument(@PathParam("id") Long id,
-			Monument monumentACreer, @Context UriInfo uriInfo) {
-		Monument monument = monumentDao.createMonumentForVille(monumentACreer,
+	public Response createProduits(@PathParam("id") Long id,
+			Produits produitsACreer, @Context UriInfo uriInfo) {
+		Produits produits = produitsDao.createProduitsForListeCourses(produitsACreer,
 				id);
-		if (monument != null) {
+		if (produits != null) {
 			URL url;
 			URI uri;
 			try {
 				url = new URL(uriInfo.getAbsolutePath().toURL()
-						.toExternalForm().replaceFirst("/villes/[0-9]+/", "/")
-						+ "/" + monument.getIdentifiant());
+						.toExternalForm().replaceFirst("/listeCourses/[0-9]+/", "/")
+						+ "/" + produits.getId());
 				uri = url.toURI();
 			} catch (MalformedURLException e) {
 				return Response.status(Status.BAD_REQUEST).build();
@@ -133,12 +133,12 @@ public class VilleResource {
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateVille(@PathParam("id") Long id, Ville villeAModifier) {
-		if (!isVilleValid(villeAModifier)) {
+	public Response updateLisiteCourses(@PathParam("id") Long id, ListeCourses listeCoursesAModifier) {
+		if (!isListeCoursesValid(listeCoursesAModifier)) {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		villeAModifier.setId(id);
-		villeDao.updateVille(villeAModifier);
+		listeCoursesAModifier.setId(id);
+		listeCoursesDao.updateListeCourses(listeCoursesAModifier);
 		return Response.ok().build();
 	}
 
@@ -148,10 +148,10 @@ public class VilleResource {
 		villeDao.deleteVilleById(id);
 	}
 	
-	private boolean isVilleValid(Ville ville) {
+	private boolean isListeCoursesValid(ListeCourses listeCourses) {
 		boolean valid = true;
-		valid &= (ville.getLatitude() != null);
-		valid &= (ville.getLongitude() != null);
+		valid &= (listeCourses.get != null);
+		valid &= (listeCourses.getLongitude() != null);
 		return valid;
 	}
 

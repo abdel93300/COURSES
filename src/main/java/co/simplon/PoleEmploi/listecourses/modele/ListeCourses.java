@@ -1,4 +1,4 @@
-package co.simplon.PoleEmploi.patrimoine.modele;
+package co.simplon.PoleEmploi.listecourses.modele;
 
 import java.util.Set;
 
@@ -17,11 +17,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "CITIES")
+@Table(name = "LISTECOURSES")
 @NamedQueries({
-		@NamedQuery(name = "Ville.findAll", query = " SELECT v FROM Ville v ORDER BY v.nom "),
-		@NamedQuery(name = "Ville.deleteById", query = " DELETE FROM Ville v WHERE v.id = :id") })
-public class Ville {
+		@NamedQuery(name = "LISTECOURSES.findAll", query = " SELECT v FROM Ville v ORDER BY v.nom "),
+		@NamedQuery(name = "LISTECOURSES.deleteById", query = " DELETE FROM Ville v WHERE v.id = :id") })
+public class ListeCourses {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +39,7 @@ public class Ville {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "ville", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private Set<Monument> monuments;
+	private Set<Produits> monuments;
 
 	public Long getId() {
 		return id;
