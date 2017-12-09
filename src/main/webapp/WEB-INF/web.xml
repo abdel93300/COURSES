@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>Cities REST Backend</display-name>
+	<display-name>listeCourses</display-name>
 
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
@@ -17,7 +17,7 @@
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>co.simplon.PoleEmploi.patrimoine.endpoint</param-value>
+			<param-value>co.simplon.PoleEmploi.listecourses.endpoint</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

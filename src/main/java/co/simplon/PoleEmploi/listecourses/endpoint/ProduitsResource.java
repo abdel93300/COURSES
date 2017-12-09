@@ -1,4 +1,4 @@
-package co.simplon.PoleEmploi.patrimoine.endpoint;
+package co.simplon.PoleEmploi.listecourses.endpoint;
 
 import java.util.List;
 
@@ -16,21 +16,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import co.simplon.PoleEmploi.patrimoine.dao.MonumentDao;
-import co.simplon.PoleEmploi.patrimoine.modele.Monument;
+import co.simplon.PoleEmploi.listecourses.dao.ProduitsDao;
+import co.simplon.PoleEmploi.listecourses.modele.Produits;
 
-@Path("/monuments")
+@Path("/produits")
 @RequestScoped
-public class MonumentResource {
+public class ProduitsResource {
 
 	private static int DEFAULT_PAGE_SIZE = 10;
 
 	@Inject
-	private MonumentDao monumentDao;
+	private ProduitsDao produitsDao;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Monument> getMonuments(@QueryParam("from") Integer from,
+	public List<Produits> getProduits(@QueryParam("from") Integer from,
 			@QueryParam("limit") Integer limit) {
 		if (from == null) {
 			from = 0;
@@ -38,32 +38,32 @@ public class MonumentResource {
 		if (limit == null) {
 			limit = DEFAULT_PAGE_SIZE;
 		}
-		List<Monument> monuments = monumentDao.findAll(from, limit);
-		return monuments;
+		List<Produits> produits = produitsDao.findAll(from, limit);
+		return produits;
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getMonumentById(@PathParam("id") Long id) {
-		Monument monument = monumentDao.getMonumentById(id);
-		if (monument != null)
-			return Response.ok(monument).build();
+	public Response getProduitsById(@PathParam("id") Long id) {
+		Produits produits = produitsDao.getProduitsById(id);
+		if (produits != null)
+			return Response.ok(produits).build();
 		return Response.status(Status.NOT_FOUND).build();
 	}
 
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateMonument(@PathParam("id") Long id, Monument monumentAModifier) {
-		monumentAModifier.setIdentifiant(id);
-		monumentDao.updateMonument(monumentAModifier);
+	public Response updateProduits(@PathParam("id") Long id, Produits produitsAModifier) {
+		produitsAModifier.setId(id);
+		produitsDao.updateProduits(produitsAModifier);
 		return Response.ok().build();
 	}
 
 	@DELETE
 	@Path("{id}")
-	public void deleteMonumentById(@PathParam("id") Long id) {
-		monumentDao.deleteMonumentById(id);
+	public void deleteProduitsById(@PathParam("id") Long id) {
+		produitsDao.deleteProduitsById(id);
 	}
 }
