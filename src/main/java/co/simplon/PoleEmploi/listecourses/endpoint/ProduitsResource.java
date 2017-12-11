@@ -42,28 +42,5 @@ public class ProduitsResource {
 		return produits;
 	}
 
-	@GET
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProduitsById(@PathParam("id") Long id) {
-		Produits produits = produitsDao.getProduitsById(id);
-		if (produits != null)
-			return Response.ok(produits).build();
-		return Response.status(Status.NOT_FOUND).build();
-	}
-
-	@PUT
-	@Path("{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateProduits(@PathParam("id") Long id, Produits produitsAModifier) {
-		produitsAModifier.setId(id);
-		produitsDao.updateProduits(produitsAModifier);
-		return Response.ok().build();
-	}
-
-	@DELETE
-	@Path("{id}")
-	public void deleteProduitsById(@PathParam("id") Long id) {
-		produitsDao.deleteProduitsById(id);
-	}
+	
 }

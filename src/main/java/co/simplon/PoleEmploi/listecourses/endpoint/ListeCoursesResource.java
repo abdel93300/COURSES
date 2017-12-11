@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -31,5 +32,3 @@ public class ListeCoursesResource {
 		return courses;
 	}
 }
-
-
