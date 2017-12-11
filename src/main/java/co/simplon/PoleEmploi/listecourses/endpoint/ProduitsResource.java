@@ -19,6 +19,8 @@ import javax.ws.rs.core.Response.Status;
 import co.simplon.PoleEmploi.listecourses.dao.ProduitsDao;
 import co.simplon.PoleEmploi.listecourses.modele.Produits;
 
+
+
 @Path("/produits")
 @RequestScoped
 public class ProduitsResource {
@@ -42,5 +44,22 @@ public class ProduitsResource {
 		return produits;
 	}
 
+	@GET
+	@Path("{id}/produits")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Produits> getProduitsByListecoursesId(@PathParam("id") Long id,
+			@QueryParam("from") Integer from, @QueryParam("limit") Integer limit) {
+		if (from == null) {
+			from = 0;
+		}
+		if (limit == null) {
+			limit = DEFAULT_PAGE_SIZE;
+		}
+		List<Produits> produits = produitsDao.findAllForListecoursesId(id, from,
+				limit);
+		return produits;
+	}
+
+	
 	
 }

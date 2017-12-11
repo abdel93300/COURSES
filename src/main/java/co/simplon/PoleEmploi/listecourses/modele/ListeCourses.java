@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -35,6 +36,7 @@ public class ListeCourses {
 	@Column(name = "VILLE")
 	private String ville;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "DATE_ACHAT")
 	private Date dateAchat;
 
@@ -61,6 +63,15 @@ public class ListeCourses {
 
 	public void setVille(String ville) {
 		this.ville = ville;
+	}
+
+	
+	public Date getDateAchat() {
+		return dateAchat;
+	}
+
+	public void setDateAchat(Date dateAchat) {
+		this.dateAchat = dateAchat;
 	}
 
 	@Override

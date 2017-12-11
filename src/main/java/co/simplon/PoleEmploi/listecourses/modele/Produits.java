@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "PRODUITS")
 @NamedQueries({
 		@NamedQuery(name = "Produits.findAll", query = " SELECT p FROM Produits p ORDER BY p.libelle "),
-		@NamedQuery(name = "Produits.findAllByListecoursesId", query = " SELECT p FROM Produits p JOIN p.listeCourses c WHERE c.id = :id ORDER BY p.libelle "),
+		@NamedQuery(name = "Produits.findAllByListeCoursesId", query = " SELECT p FROM Produits p JOIN p.listeCourses c WHERE c.id = :id ORDER BY p.libelle "),
 		@NamedQuery(name = "Produits.deleteById", query = " DELETE FROM Produits p WHERE p.id = :id") })
 public class Produits {
 
@@ -89,6 +89,7 @@ public class Produits {
 		this.listeCourses = listeCourses;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Produits [id=" + id + ", libelle=" + libelle + ", rayon=" + rayon + ", quantite=" + quantite

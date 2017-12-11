@@ -27,7 +27,7 @@ public class ProduitsJpaDao implements ProduitsDao {
 	}
 
 	@Override
-	public List<Produits> findAllForListeCoursesId(Long idListeCourses, int first, int size) {
+	public List<Produits> findAllForListecoursesId(Long idListeCourses, int first, int size) {
 		return entityManager
 				.createNamedQuery("Produits.findAllByListeCoursesId", Produits.class)
 				.setParameter("id", idListeCourses).setFirstResult(first)

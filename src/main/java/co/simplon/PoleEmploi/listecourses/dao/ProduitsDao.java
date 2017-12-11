@@ -7,7 +7,7 @@ import co.simplon.PoleEmploi.listecourses.modele.Produits;
 public interface ProduitsDao {
 	List<Produits> findAll(int first, int size);
 	
-	List<Produits> findAllForListeCoursesId(Long idListeCourses, int first, int size);
+	List<Produits> findAllForListecoursesId(Long idListeCourses, int first, int size);
 	
 	Produits getProduitsById(Long id);
 
