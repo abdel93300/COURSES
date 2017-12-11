@@ -59,7 +59,7 @@ public class ProduitsJpaDao implements ProduitsDao {
 	public Produits createProduitsForListeCourses(Produits produits, Long id) {
 		entityManager.getTransaction().begin();
 		ListeCourses listeCourses = entityManager.find(ListeCourses.class, id);
-	//	produits.setListeCourses(listeCourses);
+    	produits.setListeCourses(listeCourses);
 		entityManager.persist(produits);
 		entityManager.getTransaction().commit();
 		return produits;
