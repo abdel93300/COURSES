@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+ 
 
 import co.simplon.PoleEmploi.listecourses.modele.ListeCourses;
 
@@ -19,13 +21,12 @@ import co.simplon.PoleEmploi.listecourses.modele.ListeCourses;
 @RequestScoped
 public class ListeCoursesResource {
 
-	private static final String MediaType = null;
 	@Inject
 	private EntityManager entityManager;
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ListeCourses> getCourses() {
+	@javax.ws.rs.Produces(MediaType.APPLICATION_JSON)
+	public List<ListeCourses> getListeCourse() {
 		List<ListeCourses> courses = entityManager.createNamedQuery("Course.findAll", ListeCourses.class).getResultList();
 		return courses;
 	}
