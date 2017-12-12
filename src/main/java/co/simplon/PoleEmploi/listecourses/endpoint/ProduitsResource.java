@@ -25,7 +25,7 @@ import co.simplon.PoleEmploi.listecourses.modele.Produits;
 @RequestScoped
 public class ProduitsResource {
 
-	private static int DEFAULT_PAGE_SIZE = 2;
+	private static int DEFAULT_PAGE_SIZE = 10;
 
 	@Inject
 	private ProduitsDao produitsDao;

@@ -80,6 +80,10 @@
 					<systemProperties>
 						<referentiel.db.jdbc.url>jdbc:h2:file:~/work/pe-promo2/cities-rest-backend/db/data/referentiel</referentiel.db.jdbc.url>
 					</systemProperties>
+					<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
 				</configuration>
 			</plugin>
 		</plugins>
