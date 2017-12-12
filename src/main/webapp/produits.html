@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html data-ng-app="listeproduits">
+<head>
+	<meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="produits.js"></script>
+     <script src="bootstrap.min.js"></script>
+     <script src="bootstrap.min.css"></script>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+	<title>Produits</title>
+</head> 
+<body data-ng-controller="produitsCtrl">
+	
+	<h1>Liste des produits</h1>
+
+	 <table>
+    <tr>
+        <th>Libellé</th>
+        <th>Rayon&nbsp;&nbsp;&nbsp;</th>
+        <th>Quantité</th>
+         <th>Action</th>
+    </tr>
+    <tr data-ng-repeat="produits in listeproduits">
+        <td>{{produits.libelle}}</td>
+        <td>{{produits.rayon}}</td>
+        <td>{{produits.quantite}}</td>
+        <td>
+         <div class="btn-group">
+                <button type="button" class="btn btn-default btn" data-ng-click="edit($idP);"><i class="glyphicon glyphicon-pencil"></i></button>
+                <button type="button" class="btn btn-default btn" data-ng-click="delete();"><i class="glyphicon glyphicon-trash"></i></button>
+         </div>
+         </td>
+    </tr>
+</table>
+</body>	
+
+
+<style>
+table {
+  border: 1px solid #666;   
+    width: 50%;
+}
+th {
+  background-color: #80d4ff; 
+  font-weight: bold;    
+    padding: 2px;
+}	
+td {
+background-color :  #ffffe6; 
+  border: 1px solid #666;   
+    width: 100%;
+}
+tr {
+height : 40px; 
+}
+</style>
+</html>

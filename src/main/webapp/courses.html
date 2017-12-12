@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html data-ng-app="listecourses">
+<head>
+	<meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="courses.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="bootstrap.min.css"></script>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+	<title>Courses</title>
+</head> 
+<body data-ng-controller="coursesCtrl">
+	<h1>Liste des courses</h1>
+	
+	 <table class="table table-striped table-bordered">
+   
+    <thead>
+     <tr><th>Enseigne</th>
+        <th>Ville&nbsp;&nbsp;&nbsp;</th>
+        <th>Date Achat</th>
+        <th>Action</th>
+
+    </tr>
+       </thead>     
+    <tr data-ng-repeat="courses in listeCourses">
+        <td>{{courses.enseigne}}</td>
+        <td>{{courses.ville}}</td>
+        <td>{{courses.dateAchat | date:'dd/MM/yyyy'}}</td>
+         <td>
+         <div class="btn-group">
+                <button type="button" class="btn btn-default btn" data-ng-click="edit($idC);"><i class="glyphicon glyphicon-pencil"></i></button>
+                <button type="button" class="btn btn-default btn" data-ng-click="delete();"><i class="glyphicon glyphicon-trash"></i></button>
+         </div>
+         </td>
+    </tr>
+</table>
+
+</body>
+<style>
+table {
+  border: 1px solid #666;   
+    width: 50%;
+}
+th {
+  background-color : #80d4ff; 
+  font-weight: bold;    
+  padding: 2px;
+}	
+td {
+background-color :  #ffffe6; 
+  border: 1px solid #666;   
+    width: 100%;
+}
+tr {
+height : 20px; 
+}
+</style>
+
+ 
+</html>
